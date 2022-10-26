@@ -1,10 +1,10 @@
 install.packages('data.table')
 library(data.table)
 
-setwd('C:/Users/User/Documents/Ä«Ä«¿ÀÅå ¹ŞÀº ÆÄÀÏ')
+setwd('C:/Users/User/Documents/ì¹´ì¹´ì˜¤í†¡ ë°›ì€ íŒŒì¼')
 
-#Turkey Fence·Î ÀÌ»óÄ¡ Á¦°ÅÇÑ ÃÖÁ¾µ¥ÀÌÅÍ °¡Á®¿À±â ¹× µ¥ÀÌÅÍ È®ÀÎ
-data=fread('ÃÖÁ¾finalÀÌ»óÄ¡Á¦°Å(Turkey Fences).csv')
+#Turkey Fenceë¡œ ì´ìƒì¹˜ ì œê±°í•œ ìµœì¢…ë°ì´í„° ê°€ì ¸ì˜¤ê¸° ë° ë°ì´í„° í™•ì¸
+data=fread('ìµœì¢…finalì´ìƒì¹˜ì œê±°(Turkey Fences).csv')
 
 data=data[1:14612,]
 nrow(data[which(data$month!="2019-11-01"),])
@@ -15,10 +15,10 @@ tail(data,2)
 colnames(data)
 
 
-df=data[,-c(1,2,3,4,5,7,8,9,11,12,33,39,40)] #¹®ÀÚÇü º¯¼ö Á¦°Å
+df=data[,-c(1,2,3,4,5,7,8,9,11,12,33,39,40)] #ë¬¸ìí˜• ë³€ìˆ˜ ì œê±°
 str(df)
 
-#¹®ÀÚÇüÀ¸·Î ºÒ·¯¿ÍÁø factorÇü º¯¼ö factorÇÔ¼ö½á¼­ factorÇüÀ¸·Î ¹Ù²ãÁÖ±â
+#ë¬¸ìí˜•ìœ¼ë¡œ ë¶ˆëŸ¬ì™€ì§„ factorí˜• ë³€ìˆ˜ factorí•¨ìˆ˜ì¨ì„œ factorí˜•ìœ¼ë¡œ ë°”ê¿”ì£¼ê¸°
 df$area=as.factor(df$area)
 df$in_hanriverpark=as.factor(df$in_hanriverpark)
 df$n_hanriverpark=as.factor(df$n_hanriverpark)
@@ -26,42 +26,42 @@ df$season=as.factor(df$season)
 
 str(df)
 
-# area´Â ¼­¿ï½Ã ÀÚÄ¡±¸(25°³)·Î ¹üÁÖ°¡ ³Ê¹« ¸¹À¸¹Ç·Î ±Ç¿ªº°·Î Àç¹üÁÖÈ­(5°³)
-# µµ½É±Ç : Á¾·Î±¸, Áß±¸, ¿ë»ê±¸
-# ¼­ºÏ±Ç : ÀºÆò±¸, ¼­´ë¹®±¸, ¸¶Æ÷±¸
-# µ¿ºÏ±Ç : ³ë¿ø±¸, µµºÀ±¸, °­ºÏ±¸, ¼ººÏ±¸, Áß¶û±¸, µ¿´ë¹®±¸, ¼ºµ¿±¸, ±¤Áø±¸
-# ¼­³²±Ç : °­¼­±¸, ¾çÃµ±¸, ¿µµîÆ÷±¸, ±¸·Î±¸, ±İÃµ±¸, µ¿ÀÛ±¸, °ü¾Ç±¸
-# µ¿³²±Ç : ¼­ÃÊ±¸, °­³²±¸, ¼ÛÆÄ±¸, °­µ¿±¸
+# areaëŠ” ì„œìš¸ì‹œ ìì¹˜êµ¬(25ê°œ)ë¡œ ë²”ì£¼ê°€ ë„ˆë¬´ ë§ìœ¼ë¯€ë¡œ ê¶Œì—­ë³„ë¡œ ì¬ë²”ì£¼í™”(5ê°œ)
+# ë„ì‹¬ê¶Œ : ì¢…ë¡œêµ¬, ì¤‘êµ¬, ìš©ì‚°êµ¬
+# ì„œë¶ê¶Œ : ì€í‰êµ¬, ì„œëŒ€ë¬¸êµ¬, ë§ˆí¬êµ¬
+# ë™ë¶ê¶Œ : ë…¸ì›êµ¬, ë„ë´‰êµ¬, ê°•ë¶êµ¬, ì„±ë¶êµ¬, ì¤‘ë‘êµ¬, ë™ëŒ€ë¬¸êµ¬, ì„±ë™êµ¬, ê´‘ì§„êµ¬
+# ì„œë‚¨ê¶Œ : ê°•ì„œêµ¬, ì–‘ì²œêµ¬, ì˜ë“±í¬êµ¬, êµ¬ë¡œêµ¬, ê¸ˆì²œêµ¬, ë™ì‘êµ¬, ê´€ì•…êµ¬
+# ë™ë‚¨ê¶Œ : ì„œì´ˆêµ¬, ê°•ë‚¨êµ¬, ì†¡íŒŒêµ¬, ê°•ë™êµ¬
 table(df$area)
 area5 = as.character(df$area)
 table(area5)
-area5<-replace(area5,c(area5=="Á¾·Î±¸"|area5=="Áß±¸"|area5=="¿ë»ê±¸"),"µµ½É±Ç")
-area5<-replace(area5,c(area5=="ÀºÆò±¸"|area5=="¼­´ë¹®±¸"|area5=="¸¶Æ÷±¸"),"¼­ºÏ±Ç")
-area5<-replace(area5,c(area5=="³ë¿ø±¸"|area5=="µµºÀ±¸"|area5=="°­ºÏ±¸"|area5=="¼ººÏ±¸"|area5=="Áß¶û±¸"|area5=="µ¿´ë¹®±¸"|area5=="¼ºµ¿±¸"|area5=="±¤Áø±¸"),"µ¿ºÏ±Ç")
-area5<-replace(area5,c(area5=="°­¼­±¸"|area5=="¾çÃµ±¸"|area5=="¿µµîÆ÷±¸"|area5=="±¸·Î±¸"|area5=="±İÃµ±¸"|area5=="µ¿ÀÛ±¸"|area5=="°ü¾Ç±¸"),"¼­³²±Ç")
-area5<-replace(area5,c(area5=="¼­ÃÊ±¸"|area5=="°­³²±¸"|area5=="¼ÛÆÄ±¸"|area5=="°­µ¿±¸"),"µ¿³²±Ç")
+area5<-replace(area5,c(area5=="ì¢…ë¡œêµ¬"|area5=="ì¤‘êµ¬"|area5=="ìš©ì‚°êµ¬"),"ë„ì‹¬ê¶Œ")
+area5<-replace(area5,c(area5=="ì€í‰êµ¬"|area5=="ì„œëŒ€ë¬¸êµ¬"|area5=="ë§ˆí¬êµ¬"),"ì„œë¶ê¶Œ")
+area5<-replace(area5,c(area5=="ë…¸ì›êµ¬"|area5=="ë„ë´‰êµ¬"|area5=="ê°•ë¶êµ¬"|area5=="ì„±ë¶êµ¬"|area5=="ì¤‘ë‘êµ¬"|area5=="ë™ëŒ€ë¬¸êµ¬"|area5=="ì„±ë™êµ¬"|area5=="ê´‘ì§„êµ¬"),"ë™ë¶ê¶Œ")
+area5<-replace(area5,c(area5=="ê°•ì„œêµ¬"|area5=="ì–‘ì²œêµ¬"|area5=="ì˜ë“±í¬êµ¬"|area5=="êµ¬ë¡œêµ¬"|area5=="ê¸ˆì²œêµ¬"|area5=="ë™ì‘êµ¬"|area5=="ê´€ì•…êµ¬"),"ì„œë‚¨ê¶Œ")
+area5<-replace(area5,c(area5=="ì„œì´ˆêµ¬"|area5=="ê°•ë‚¨êµ¬"|area5=="ì†¡íŒŒêµ¬"|area5=="ê°•ë™êµ¬"),"ë™ë‚¨ê¶Œ")
 
-table(area5) #È®ÀÎ
+table(area5) #í™•ì¸
 
 df=cbind(area5,df)		
 str(df)
 
-df=df[,-c(2)] #area Á¦°Å
+df=df[,-c(2)] #area ì œê±°
 str(df)
 df$area5=as.factor(df$area5)
 str(df)
 
-# #####df2»ı¼º : school_numÀ» school_YN(ÇĞ±³À¯¹«), 
-# subway_num+ bus_num ÇÕÄ£ trafficº¯¼ö,
-# park_numÀ» park_YN(°ø¿øÀ¯¹«)º¯¼ö·Î ¸¸µéÀÚ.####
+# #####df2ìƒì„± : school_numì„ school_YN(í•™êµìœ ë¬´), 
+# subway_num+ bus_num í•©ì¹œ trafficë³€ìˆ˜,
+# park_numì„ park_YN(ê³µì›ìœ ë¬´)ë³€ìˆ˜ë¡œ ë§Œë“¤ì.####
 
 
-#subway+bus º¯¼ö »ı¼º : transfer
+#subway+bus ë³€ìˆ˜ ìƒì„± : transfer
 str(df)
 traffic=df$subway_num+df$busStop_num
 length(traffic)
 
-#°ø¿ø À¯¹« º¯¼ö »ı¼º : park_YN
+#ê³µì› ìœ ë¬´ ë³€ìˆ˜ ìƒì„± : park_YN
 park_YN=rep(0,nrow(df))
 df=cbind(df,park_YN)
 str(df)
@@ -74,7 +74,7 @@ df$park_YN=as.factor(df$park_YN)
 str(df)
 unique(df$park_YN)
 
-#ÇĞ±³ À¯¹« º¯¼ö »ı¼º : school_YN
+#í•™êµ ìœ ë¬´ ë³€ìˆ˜ ìƒì„± : school_YN
 school_YN=rep(0,nrow(df))
 df=cbind(df,school_YN)
 str(df)
@@ -94,28 +94,28 @@ str(df2)
 colnames(df2)
 colnames(data)
 
-#df2_1: user_num=0ÀÎ Çà Á¦°Å
+#df2_1: user_num=0ì¸ í–‰ ì œê±°
 df2_1=df2[-which(df2$user_num==0),]
 str(df2_1)
 
-#### 1. full model : ÀÌ»óÄ¡ Á¦°Å¸¸ ÇÑ µ¥ÀÌÅÍ(¹®ÀÚÇü Áö¿ì°í ¹Ù·Î µ¹¸° È¸±Í¸ğµ¨) ####
+#### 1. full model : ì´ìƒì¹˜ ì œê±°ë§Œ í•œ ë°ì´í„°(ë¬¸ìí˜• ì§€ìš°ê³  ë°”ë¡œ ëŒë¦° íšŒê·€ëª¨ë¸) ####
 lmfull=lm(user_num ~ . , data=df2_1)
 summary(lmfull)
 
-#full model VIFÈ®ÀÎ
+#full model VIFí™•ì¸
 library(olsrr)
 
 multicor_lmfull=ols_vif_tol(lmfull)
 str(multicor_lmfull)
-#´ÙÁß°ø¼±¼º vif>10 ÀÎ º¯¼ö Ã£±â
+#ë‹¤ì¤‘ê³µì„ ì„± vif>10 ì¸ ë³€ìˆ˜ ì°¾ê¸°
 multicor_lmfull[which(multicor_lmfull$VIF>=10),]
-#ÇÑ°­À¯¹«º¯¼ö, ÇÑ°­Á¾·ùº¯¼ö ´ÙÁß°ø¼±¼º inf°ª °¡Áü.
-#¾Æ¸¶µµ ÇÑ°­À¯¹«º¯¼ö¶û ÇÑ°­Á¾·ùº¯¼ö°¡ °­ÇÑ ¼±Çü°ü°è¸¦ °¡Áö´Â °Í ¶§¹®ÀÎµí
-#oneDay_mem, regular, oneDay_cust µµ ´ÙÁß°ø¼±¼º °¡Áö¹Ç·Î Á¦°ÅÇÏ·Î °áÁ¤.
-#AGE_002, AGE_008Àº 10ÀÌ¶û °¡±õ°í ´Ù¸¥ º¯¼ö¿ÍÀÇ »ó°ü°ü°è °¡´É¼ºÀÌ ³ôÀº º¯¼ö¶ó ÀÏ´Ü ³öµÎÀÚ.
+#í•œê°•ìœ ë¬´ë³€ìˆ˜, í•œê°•ì¢…ë¥˜ë³€ìˆ˜ ë‹¤ì¤‘ê³µì„ ì„± infê°’ ê°€ì§.
+#ì•„ë§ˆë„ í•œê°•ìœ ë¬´ë³€ìˆ˜ë‘ í•œê°•ì¢…ë¥˜ë³€ìˆ˜ê°€ ê°•í•œ ì„ í˜•ê´€ê³„ë¥¼ ê°€ì§€ëŠ” ê²ƒ ë•Œë¬¸ì¸ë“¯
+#oneDay_mem, regular, oneDay_cust ë„ ë‹¤ì¤‘ê³µì„ ì„± ê°€ì§€ë¯€ë¡œ ì œê±°í•˜ë¡œ ê²°ì •.
+#AGE_002, AGE_008ì€ 10ì´ë‘ ê°€ê¹ê³  ë‹¤ë¥¸ ë³€ìˆ˜ì™€ì˜ ìƒê´€ê´€ê³„ ê°€ëŠ¥ì„±ì´ ë†’ì€ ë³€ìˆ˜ë¼ ì¼ë‹¨ ë†”ë‘ì.
 
 
-#´Ù½Ã correlation È®ÀÎ
+#ë‹¤ì‹œ correlation í™•ì¸
 #1. area
 #str(df[i,'area'])
 sort_area=sort(unique(df$area))
@@ -179,15 +179,15 @@ cor_df=cor(cordf)
 cor_df
 
 windows()
-corrplot(cor_df,main="ÃÖÁ¾ µ¥ÀÌÅÍ º¯¼öµé °£ »ó°ü°ü°è È®ÀÎ")
+corrplot(cor_df,main="ìµœì¢… ë°ì´í„° ë³€ìˆ˜ë“¤ ê°„ ìƒê´€ê´€ê³„ í™•ì¸")
 
-#ÇÑ°­Á¾·ùº¯¼ö¿Í ÇÑ°­À¯¹«º¯¼ö correlation È®ÀÎ
-cor(cordf$in_hanriverpark_nu,cordf$n_hanriverpark_nu) #¾à 0.9383
+#í•œê°•ì¢…ë¥˜ë³€ìˆ˜ì™€ í•œê°•ìœ ë¬´ë³€ìˆ˜ correlation í™•ì¸
+cor(cordf$in_hanriverpark_nu,cordf$n_hanriverpark_nu) #ì•½ 0.9383
 
-#´ÙÁß°ø¼±¼º ³ôÀ½ µû¶ó¼­ µÑ Áß ÇÏ³ª Á¦°ÅÇØ¾ßÇÔ.
+#ë‹¤ì¤‘ê³µì„ ì„± ë†’ìŒ ë”°ë¼ì„œ ë‘˜ ì¤‘ í•˜ë‚˜ ì œê±°í•´ì•¼í•¨.
 
-###2. ÇÑ°­Á¾·ùº¯¼ö Á¦°Å************
-#ÇÑ°­Á¾·ùº¯¼ö Á¦°ÅÇÏ´Â °ÍÀ¸·Î °áÁ¤- > ÇÑ°­Á¾·ù°¡ ¼öÁØÀÇ °³¼ö°¡ ¸¹¾Æ ÇØ¼®ÀÌ Èûµé°Í°°´Ù.
+###2. í•œê°•ì¢…ë¥˜ë³€ìˆ˜ ì œê±°************
+#í•œê°•ì¢…ë¥˜ë³€ìˆ˜ ì œê±°í•˜ëŠ” ê²ƒìœ¼ë¡œ ê²°ì •- > í•œê°•ì¢…ë¥˜ê°€ ìˆ˜ì¤€ì˜ ê°œìˆ˜ê°€ ë§ì•„ í•´ì„ì´ í˜ë“¤ê²ƒê°™ë‹¤.
 str(df2_1)
 df3=df2_1[,-c('n_hanriverpark','oneDay_mem','oneDay_cust','regular')]
 str(df3)
@@ -196,30 +196,30 @@ summary(lm3)
 lm.inter.full=lm(user_num ~ .^2, data=df3)
 summary(lm.inter.full)
 
-#À¯ÀÇÇÑ ±³È£ÀÛ¿ë º¯¼öµé : area5*AGE_003 +  number_of_holders*total_store+ number_of_holders*food_num+number_of_holders*work_num+
+#ìœ ì˜í•œ êµí˜¸ì‘ìš© ë³€ìˆ˜ë“¤ : area5*AGE_003 +  number_of_holders*total_store+ number_of_holders*food_num+number_of_holders*work_num+
 #number_of_holders*AGE_005 + group*work_num + 
 # group*AGE_004  + group*AGE_005 + group*AGE_008 + group*traffic+ total_store*food_num+
 #total_store*move_num + food_num:move_num + live_num*move_num 
 
-#À¯ÀÇÇÑ ±³È£ÀÛ¿ë º¯¼öµé¸¸ Ãß°¡ÇÑ ¸ğµ¨
+#ìœ ì˜í•œ êµí˜¸ì‘ìš© ë³€ìˆ˜ë“¤ë§Œ ì¶”ê°€í•œ ëª¨ë¸
 
 lm.inter1=lm(user_num ~ . +  area5*AGE_003 + number_of_holders*total_store+ number_of_holders*food_num+number_of_holders*work_num+
                group*AGE_004  + group*AGE_005 + group*AGE_008 + group*traffic + total_store*food_num +
                total_store*move_num + food_num*move_num +live_num*move_num
-               , data=df3) #area5*AGE_003, total_store*food_num, live_num*move_num Ãß°¡
+               , data=df3) #area5*AGE_003, total_store*food_num, live_num*move_num ì¶”ê°€
 summary(lm.inter1)
 
-#´ÙÁß°ø¼±¼º È®ÀÎ
+#ë‹¤ì¤‘ê³µì„ ì„± í™•ì¸
 multicor_lm.inter1=ols_vif_tol(lm.inter1)
 #multicor_lm.inter1
-#´ÙÁß°ø¼±¼º vif>10 ÀÎ º¯¼ö Ã£±â
+#ë‹¤ì¤‘ê³µì„ ì„± vif>10 ì¸ ë³€ìˆ˜ ì°¾ê¸°
 vifover10=multicor_lm.inter1[which(multicor_lm.inter1$VIF>=10),]
 vifover10$Variables
 #total_store, food_num, AGE_003, number_of_holders:total_store, number_of_holders:food_num, group:AGE_004, group:AGE_005, total_store:move_num
-#food_num:move_num°¡ ´ÙÁß°ø¼±¼º ³ôÀº º¯¼öµé
+#food_num:move_numê°€ ë‹¤ì¤‘ê³µì„ ì„± ë†’ì€ ë³€ìˆ˜ë“¤
 
-#´ÙÁß°ø¼±¼º ³ôÀº º¯¼ö Á¦°Å
-#total_store, food_num Áß ´õ ´ÙÁß°ø¼±¼ºÀÌ ³ôÀº total_store¸¦ Á¦°Å
+#ë‹¤ì¤‘ê³µì„ ì„± ë†’ì€ ë³€ìˆ˜ ì œê±°
+#total_store, food_num ì¤‘ ë” ë‹¤ì¤‘ê³µì„ ì„±ì´ ë†’ì€ total_storeë¥¼ ì œê±°
 df3_1=df3[,-c('total_store')]
 str(df3_1)
 lm.inter2=lm(user_num ~ . +   area5*AGE_003 + number_of_holders*food_num+number_of_holders*work_num+
@@ -230,11 +230,11 @@ summary(lm.inter2)
 
 multicor_lm.inter2=ols_vif_tol(lm.inter2)
 #multicor_lm.inter2
-#´ÙÁß°ø¼±¼º vif>10 ÀÎ º¯¼ö Ã£±â
+#ë‹¤ì¤‘ê³µì„ ì„± vif>10 ì¸ ë³€ìˆ˜ ì°¾ê¸°
 multicor_lm.inter2[which(multicor_lm.inter2$VIF>=10),]
-#group*AGE_004, group:AGE_005, number_of_holders:food_num Å©°Ô ³ª¿È
+#group*AGE_004, group:AGE_005, number_of_holders:food_num í¬ê²Œ ë‚˜ì˜´
 
-#´ÙÁß°ø¼±¼º ³ôÀº º¯¼ö Á¦°Å2
+#ë‹¤ì¤‘ê³µì„ ì„± ë†’ì€ ë³€ìˆ˜ ì œê±°2
 l=lm(user_num ~ . + area5*AGE_003 +number_of_holders*work_num+
   group*AGE_004  + group*AGE_005 + group*AGE_008 + group*traffic+
   food_num*move_num +live_num*move_num, data=df3_1)
@@ -266,9 +266,9 @@ formula(l2)
 # multicor_lm.inter3=ols_vif_tol(lm.inter3)
 # multicor_lm.inter3
 # #multicor_lm.inter2
-# #´ÙÁß°ø¼±¼º vif>10 ÀÎ º¯¼ö Ã£±â = °á°ú ¾øÀ½ = > vif >10ÀÎ º¯¼öµé ¾øÀ½
+# #ë‹¤ì¤‘ê³µì„ ì„± vif>10 ì¸ ë³€ìˆ˜ ì°¾ê¸° = ê²°ê³¼ ì—†ìŒ = > vif >10ì¸ ë³€ìˆ˜ë“¤ ì—†ìŒ
 # multicor_lm.inter3[which(multicor_lm.inter3$VIF>=10),]
-# #±³È£ÀÛ¿ë Ãß°¡ÇÑ ¸ğµ¨ »ı¼º : lm.inter3 = user_num ~ area5 + number_of_holders + group + food_num + live_num + 
+# #êµí˜¸ì‘ìš© ì¶”ê°€í•œ ëª¨ë¸ ìƒì„± : lm.inter3 = user_num ~ area5 + number_of_holders + group + food_num + live_num + 
 # # work_num + move_num + AGE_001 + AGE_002 + AGE_003 + AGE_004 + 
 # #   AGE_005 + AGE_006 + AGE_007 + AGE_008 + in_hanriverpark + 
 # #   season + park_YN + school_YN + traffic + number_of_holders * 
@@ -283,63 +283,63 @@ formula(l2)
 library(MASS)
 l2step=stepAIC(l2,direction='both')
 summary(l2step)
-formula(l2step) #work_num, AGE_007, in_hanriverpark Á¦°Å
+formula(l2step) #work_num, AGE_007, in_hanriverpark ì œê±°
 str(l2step)
 
-#ÃÖÁ¾¸ğµ¨ lmfinal
+#ìµœì¢…ëª¨ë¸ lmfinal
 lmfinal=stepAIC(l2, direction='both')
 summary(lmfinal)
 formula(lmfinal)
 
-### ÃÖÁ¾ È¸±Í ¸ğµ¨ Å×½ºÆ® ###
-# lmfinal : ÃÖÁ¾ È¸±Í
+### ìµœì¢… íšŒê·€ ëª¨ë¸ í…ŒìŠ¤íŠ¸ ###
+# lmfinal : ìµœì¢… íšŒê·€
 windows()
 par(mfrow=c(2,2))
 plot(lmfinal) 
-# fitted vs residuals : ¸ğÇüÀÇ ¼±Çü¼º
-# Normal Q-Q : ÀÜÂ÷ÀÇ Á¤±Ô¼º
-# Scale-Location : ÀÜÂ÷ÀÇ µîºĞ»ê¼º 
-# Cook's distance : ±Ø´Ü°ª
+# fitted vs residuals : ëª¨í˜•ì˜ ì„ í˜•ì„±
+# Normal Q-Q : ì”ì°¨ì˜ ì •ê·œì„±
+# Scale-Location : ì”ì°¨ì˜ ë“±ë¶„ì‚°ì„± 
+# Cook's distance : ê·¹ë‹¨ê°’
 
-### Á¤±Ô¼º °ËÁ¤ ###
-# ÀÜÂ÷°¡ Á¤±ÔºĞÆ÷ µû¸£´ÂÁö È®ÀÎ 
+### ì •ê·œì„± ê²€ì • ###
+# ì”ì°¨ê°€ ì •ê·œë¶„í¬ ë”°ë¥´ëŠ”ì§€ í™•ì¸ 
 
-# q-q plot È®ÀÎÇÏ±â (½Ã°¢Àû ¹æ¹ıÀ¸·Î È®ÀÎÇÏ±â)
+# q-q plot í™•ì¸í•˜ê¸° (ì‹œê°ì  ë°©ë²•ìœ¼ë¡œ í™•ì¸í•˜ê¸°)
 windows()
 par(mfrow=c(2,2))
 plot(lmfinal) 
 
-# n>5000ÀÌ¹Ç·Î Kolmogorov-Smirnov test, Äİ¸ğ°í·ÎÇÁ-½º¹Ì³ëÇÁ °ËÁ¤
+# n>5000ì´ë¯€ë¡œ Kolmogorov-Smirnov test, ì½œëª¨ê³ ë¡œí”„-ìŠ¤ë¯¸ë…¸í”„ ê²€ì •
 
-# ±Í¹«°¡¼³ : Á¤±ÔºĞÆ÷¸¦ µû¸¥´Ù, ´ë¸³°¡¼³ : not ±Í¹«°¡¼³
+# ê·€ë¬´ê°€ì„¤ : ì •ê·œë¶„í¬ë¥¼ ë”°ë¥¸ë‹¤, ëŒ€ë¦½ê°€ì„¤ : not ê·€ë¬´ê°€ì„¤
 ks.test(lmfinal$residuals, "pnorm", mean=mean(lmfinal$residuals), sd=sd(lmfinal$residuals))
-# p-value < 2.2e-16 < 0.05 reject ±Í¹«°¡¼³. Á¤±ÔºĞÆ÷¸¦ µû¸£Áö ¾Ê´Â´Ù.
+# p-value < 2.2e-16 < 0.05 reject ê·€ë¬´ê°€ì„¤. ì •ê·œë¶„í¬ë¥¼ ë”°ë¥´ì§€ ì•ŠëŠ”ë‹¤.
 windows()
-hist(rstandard(lmfinal)) # Ç¥ÁØÈ­ ÀÜÂ÷ÀÇ ºĞÆ÷¸¦ ±×·¡ÇÁ·Î ±×·Áº¸±â 
+hist(rstandard(lmfinal)) # í‘œì¤€í™” ì”ì°¨ì˜ ë¶„í¬ë¥¼ ê·¸ë˜í”„ë¡œ ê·¸ë ¤ë³´ê¸° 
 
-### µ¶¸³¼º °ËÁ¤ ###
+### ë…ë¦½ì„± ê²€ì • ###
 
-# durbinWatsonTest : ÀÜÂ÷³¢¸® ÀÚ±â»ó°ü¼º ÀÖ´ÂÁö È®ÀÎ
+# durbinWatsonTest : ì”ì°¨ë¼ë¦¬ ìê¸°ìƒê´€ì„± ìˆëŠ”ì§€ í™•ì¸
 #install.packages("lmtest")
-# ±Í¹«°¡¼³ : ÀÜÂ÷³¢¸® ÀÚ±â»ó°ü¼ºÀ» °¡ÁöÁö¾Ê´Â´Ù. (µ¶¸³)
-# ´ë¸³°¡¼³ : ÀÜÂ÷³¢¸® ÀÚ±â»ó°ü¼ºÀ» °¡Áø´Ù.
+# ê·€ë¬´ê°€ì„¤ : ì”ì°¨ë¼ë¦¬ ìê¸°ìƒê´€ì„±ì„ ê°€ì§€ì§€ì•ŠëŠ”ë‹¤. (ë…ë¦½)
+# ëŒ€ë¦½ê°€ì„¤ : ì”ì°¨ë¼ë¦¬ ìê¸°ìƒê´€ì„±ì„ ê°€ì§„ë‹¤.
 library(lmtest)
 dwtest(lmfinal)
-# p-value < 2.2e-16 < 0.05 reject ±Í¹«°¡¼³. µ¶¸³¼ºÀ» µû¸£Áö ¾Ê´Â´Ù.
+# p-value < 2.2e-16 < 0.05 reject ê·€ë¬´ê°€ì„¤. ë…ë¦½ì„±ì„ ë”°ë¥´ì§€ ì•ŠëŠ”ë‹¤.
 
-### ÀÌ»óÄ¡ È®ÀÎ ###
+### ì´ìƒì¹˜ í™•ì¸ ###
 library(car)
 outlier=outlierTest(lmfinal, n.max=nrow(df3_2))
 str(df3_2)
-length(outlier$p) #41°³
-#outlier Çà ¹øÈ£
+length(outlier$p) #41ê°œ
+#outlier í–‰ ë²ˆí˜¸
 outlier_row=names(outlier$p)
 outlier_row=as.numeric(outlier_row)
 
-df3_3 = df3_2[-c(outlier_row),] # ÀÌ»óÄ¡ Á¦°ÅÇÑ µ¥ÀÌÅÍ
-str(df3_3) #41°³ Á¦°Å
+df3_3 = df3_2[-c(outlier_row),] # ì´ìƒì¹˜ ì œê±°í•œ ë°ì´í„°
+str(df3_3) #41ê°œ ì œê±°
 
-### ÀÌ»óÄ¡ Á¦°ÅÇÑ µ¥ÀÌÅÍ·Î È¸±Í ###
+### ì´ìƒì¹˜ ì œê±°í•œ ë°ì´í„°ë¡œ íšŒê·€ ###
 lmout=lm(formula(lmfinal),data=df3_3)
 summary(lmout)
 ols_vif_tol(lmout)
@@ -351,37 +351,37 @@ windows()
 par(mfrow=c(2,2))
 plot(lmoutStep)
 
-### Á¤±Ô¼º °ËÁ¤ ###
-# ÀÜÂ÷°¡ Á¤±ÔºĞÆ÷ µû¸£´ÂÁö È®ÀÎ 
+### ì •ê·œì„± ê²€ì • ###
+# ì”ì°¨ê°€ ì •ê·œë¶„í¬ ë”°ë¥´ëŠ”ì§€ í™•ì¸ 
 
-# n>5000ÀÌ¹Ç·Î Kolmogorov-Smirnov test, Äİ¸ğ°í·ÎÇÁ-½º¹Ì³ëÇÁ °ËÁ¤
+# n>5000ì´ë¯€ë¡œ Kolmogorov-Smirnov test, ì½œëª¨ê³ ë¡œí”„-ìŠ¤ë¯¸ë…¸í”„ ê²€ì •
 
-# ±Í¹«°¡¼³ : Á¤±ÔºĞÆ÷¸¦ µû¸¥´Ù, ´ë¸³°¡¼³ : not ±Í¹«°¡¼³
+# ê·€ë¬´ê°€ì„¤ : ì •ê·œë¶„í¬ë¥¼ ë”°ë¥¸ë‹¤, ëŒ€ë¦½ê°€ì„¤ : not ê·€ë¬´ê°€ì„¤
 ks.test(lmoutStep$residuals, "pnorm", mean=mean(lmoutStep$residuals), sd=sd(lmoutStep$residuals))
-# p-value < 2.2e-16 < 0.05 reject ±Í¹«°¡¼³. Á¤±ÔºĞÆ÷¸¦ µû¸£Áö ¾Ê´Â´Ù.
+# p-value < 2.2e-16 < 0.05 reject ê·€ë¬´ê°€ì„¤. ì •ê·œë¶„í¬ë¥¼ ë”°ë¥´ì§€ ì•ŠëŠ”ë‹¤.
 windows()
-hist(rstandard(lmoutStep)) # Ç¥ÁØÈ­ ÀÜÂ÷ÀÇ ºĞÆ÷¸¦ ±×·¡ÇÁ·Î ±×·Áº¸±â 
+hist(rstandard(lmoutStep)) # í‘œì¤€í™” ì”ì°¨ì˜ ë¶„í¬ë¥¼ ê·¸ë˜í”„ë¡œ ê·¸ë ¤ë³´ê¸° 
 
-### µ¶¸³¼º °ËÁ¤ ###
+### ë…ë¦½ì„± ê²€ì • ###
 
-# durbinWatsonTest : ÀÜÂ÷³¢¸® ÀÚ±â»ó°ü¼º ÀÖ´ÂÁö È®ÀÎ
+# durbinWatsonTest : ì”ì°¨ë¼ë¦¬ ìê¸°ìƒê´€ì„± ìˆëŠ”ì§€ í™•ì¸
 #install.packages("lmtest")
-# ±Í¹«°¡¼³ : ÀÜÂ÷³¢¸® ÀÚ±â»ó°ü¼ºÀ» °¡ÁöÁö¾Ê´Â´Ù. (µ¶¸³)
-# ´ë¸³°¡¼³ : ÀÜÂ÷³¢¸® ÀÚ±â»ó°ü¼ºÀ» °¡Áø´Ù.
+# ê·€ë¬´ê°€ì„¤ : ì”ì°¨ë¼ë¦¬ ìê¸°ìƒê´€ì„±ì„ ê°€ì§€ì§€ì•ŠëŠ”ë‹¤. (ë…ë¦½)
+# ëŒ€ë¦½ê°€ì„¤ : ì”ì°¨ë¼ë¦¬ ìê¸°ìƒê´€ì„±ì„ ê°€ì§„ë‹¤.
 library(lmtest)
 dwtest(lmoutStep)
-# p-value < 2.2e-16 < 0.05 reject ±Í¹«°¡¼³. µ¶¸³¼ºÀ» µû¸£Áö ¾Ê´Â´Ù.
+# p-value < 2.2e-16 < 0.05 reject ê·€ë¬´ê°€ì„¤. ë…ë¦½ì„±ì„ ë”°ë¥´ì§€ ì•ŠëŠ”ë‹¤.
 
-# ÀÌ»óÄ¡¸¦ Á¦°ÅÇßÁö¸¸, µîºĞ»ê¼º, µ¶¸³¼º, Á¤±Ô¼º ¸¸Á· ¾ÈÇÔ
+# ì´ìƒì¹˜ë¥¼ ì œê±°í–ˆì§€ë§Œ, ë“±ë¶„ì‚°ì„±, ë…ë¦½ì„±, ì •ê·œì„± ë§Œì¡± ì•ˆí•¨
 
 
-#################################Á¤±Ô¼º ÇØ°á####################
-#1. ¿µÇâÄ¡ Á¦°Å (Cook's distance)
+#################################ì •ê·œì„± í•´ê²°####################
+#1. ì˜í–¥ì¹˜ ì œê±° (Cook's distance)
 
-#2. ¹İÀÀº¯¼öÀÇ ¼öÇĞÀû º¯È¯
-##1) log º¯È¯
+#2. ë°˜ì‘ë³€ìˆ˜ì˜ ìˆ˜í•™ì  ë³€í™˜
+##1) log ë³€í™˜
 
-### ÀÌ»óÄ¡ Á¦°ÅÇÑ µ¥ÀÌÅÍ·Î È¸±Í ###
+### ì´ìƒì¹˜ ì œê±°í•œ ë°ì´í„°ë¡œ íšŒê·€ ###
 formula(lmoutStep)
 lmoutLog=lm(log(user_num)~ area5 + number_of_holders + group + food_num + work_num + 
               move_num + AGE_002 + AGE_004 + AGE_005 + AGE_006 + AGE_008 + 
@@ -397,30 +397,30 @@ windows()
 par(mfrow=c(2,2))
 plot(lmoutLogStep)
 
-### Á¤±Ô¼º °ËÁ¤ ###
-# ÀÜÂ÷°¡ Á¤±ÔºĞÆ÷ µû¸£´ÂÁö È®ÀÎ 
+### ì •ê·œì„± ê²€ì • ###
+# ì”ì°¨ê°€ ì •ê·œë¶„í¬ ë”°ë¥´ëŠ”ì§€ í™•ì¸ 
 
-# n>5000ÀÌ¹Ç·Î Kolmogorov-Smirnov test, Äİ¸ğ°í·ÎÇÁ-½º¹Ì³ëÇÁ °ËÁ¤
+# n>5000ì´ë¯€ë¡œ Kolmogorov-Smirnov test, ì½œëª¨ê³ ë¡œí”„-ìŠ¤ë¯¸ë…¸í”„ ê²€ì •
 
-# ±Í¹«°¡¼³ : Á¤±ÔºĞÆ÷¸¦ µû¸¥´Ù, ´ë¸³°¡¼³ : not ±Í¹«°¡¼³
+# ê·€ë¬´ê°€ì„¤ : ì •ê·œë¶„í¬ë¥¼ ë”°ë¥¸ë‹¤, ëŒ€ë¦½ê°€ì„¤ : not ê·€ë¬´ê°€ì„¤
 ks.test(lmoutLogStep$residuals, "pnorm", mean=mean(lmoutLogStep$residuals), sd=sd(lmoutLogStep$residuals))
-# p-value < 2.2e-16 < 0.05 reject ±Í¹«°¡¼³. Á¤±ÔºĞÆ÷¸¦ µû¸£Áö ¾Ê´Â´Ù.
+# p-value < 2.2e-16 < 0.05 reject ê·€ë¬´ê°€ì„¤. ì •ê·œë¶„í¬ë¥¼ ë”°ë¥´ì§€ ì•ŠëŠ”ë‹¤.
 windows()
-hist(rstandard(lmoutLogStep)) # Ç¥ÁØÈ­ ÀÜÂ÷ÀÇ ºĞÆ÷¸¦ ±×·¡ÇÁ·Î ±×·Áº¸±â 
+hist(rstandard(lmoutLogStep)) # í‘œì¤€í™” ì”ì°¨ì˜ ë¶„í¬ë¥¼ ê·¸ë˜í”„ë¡œ ê·¸ë ¤ë³´ê¸° 
 
-### µ¶¸³¼º °ËÁ¤ ###
+### ë…ë¦½ì„± ê²€ì • ###
 
-# durbinWatsonTest : ÀÜÂ÷³¢¸® ÀÚ±â»ó°ü¼º ÀÖ´ÂÁö È®ÀÎ
+# durbinWatsonTest : ì”ì°¨ë¼ë¦¬ ìê¸°ìƒê´€ì„± ìˆëŠ”ì§€ í™•ì¸
 #install.packages("lmtest")
-# ±Í¹«°¡¼³ : ÀÜÂ÷³¢¸® ÀÚ±â»ó°ü¼ºÀ» °¡ÁöÁö¾Ê´Â´Ù. (µ¶¸³)
-# ´ë¸³°¡¼³ : ÀÜÂ÷³¢¸® ÀÚ±â»ó°ü¼ºÀ» °¡Áø´Ù.
+# ê·€ë¬´ê°€ì„¤ : ì”ì°¨ë¼ë¦¬ ìê¸°ìƒê´€ì„±ì„ ê°€ì§€ì§€ì•ŠëŠ”ë‹¤. (ë…ë¦½)
+# ëŒ€ë¦½ê°€ì„¤ : ì”ì°¨ë¼ë¦¬ ìê¸°ìƒê´€ì„±ì„ ê°€ì§„ë‹¤.
 library(lmtest)
 dwtest(lmoutLogStep)
-# p-value < 2.2e-16 < 0.05 reject ±Í¹«°¡¼³. µ¶¸³¼ºÀ» µû¸£Áö ¾Ê´Â´Ù.
+# p-value < 2.2e-16 < 0.05 reject ê·€ë¬´ê°€ì„¤. ë…ë¦½ì„±ì„ ë”°ë¥´ì§€ ì•ŠëŠ”ë‹¤.
 
-# ÀÌ»óÄ¡¸¦ Á¦°ÅÇßÁö¸¸, µîºĞ»ê¼º, µ¶¸³¼º, Á¤±Ô¼º ¸¸Á· ¾ÈÇÔ
+# ì´ìƒì¹˜ë¥¼ ì œê±°í–ˆì§€ë§Œ, ë“±ë¶„ì‚°ì„±, ë…ë¦½ì„±, ì •ê·œì„± ë§Œì¡± ì•ˆí•¨
 
-##2) squre route º¯È¯
+##2) squre route ë³€í™˜
 
 ### ###
 formula(lmoutStep)
@@ -438,36 +438,36 @@ windows()
 par(mfrow=c(2,2))
 plot(lmoutsqStep)
 
-### Á¤±Ô¼º °ËÁ¤ ###
-# ÀÜÂ÷°¡ Á¤±ÔºĞÆ÷ µû¸£´ÂÁö È®ÀÎ 
+### ì •ê·œì„± ê²€ì • ###
+# ì”ì°¨ê°€ ì •ê·œë¶„í¬ ë”°ë¥´ëŠ”ì§€ í™•ì¸ 
 
-# n>5000ÀÌ¹Ç·Î Kolmogorov-Smirnov test, Äİ¸ğ°í·ÎÇÁ-½º¹Ì³ëÇÁ °ËÁ¤
+# n>5000ì´ë¯€ë¡œ Kolmogorov-Smirnov test, ì½œëª¨ê³ ë¡œí”„-ìŠ¤ë¯¸ë…¸í”„ ê²€ì •
 
-# ±Í¹«°¡¼³ : Á¤±ÔºĞÆ÷¸¦ µû¸¥´Ù, ´ë¸³°¡¼³ : not ±Í¹«°¡¼³
+# ê·€ë¬´ê°€ì„¤ : ì •ê·œë¶„í¬ë¥¼ ë”°ë¥¸ë‹¤, ëŒ€ë¦½ê°€ì„¤ : not ê·€ë¬´ê°€ì„¤
 ks.test(lmoutsqStep$residuals, "pnorm", mean=mean(lmoutsqStep$residuals), sd=sd(lmoutsqStep$residuals))
-# p-value < 2.2e-16 < 0.05 reject ±Í¹«°¡¼³. Á¤±ÔºĞÆ÷¸¦ µû¸£Áö ¾Ê´Â´Ù.
+# p-value < 2.2e-16 < 0.05 reject ê·€ë¬´ê°€ì„¤. ì •ê·œë¶„í¬ë¥¼ ë”°ë¥´ì§€ ì•ŠëŠ”ë‹¤.
 windows()
-hist(rstandard(lmoutsqStep)) # Ç¥ÁØÈ­ ÀÜÂ÷ÀÇ ºĞÆ÷¸¦ ±×·¡ÇÁ·Î ±×·Áº¸±â 
+hist(rstandard(lmoutsqStep)) # í‘œì¤€í™” ì”ì°¨ì˜ ë¶„í¬ë¥¼ ê·¸ë˜í”„ë¡œ ê·¸ë ¤ë³´ê¸° 
 
-### µ¶¸³¼º °ËÁ¤ ###
+### ë…ë¦½ì„± ê²€ì • ###
 
-# durbinWatsonTest : ÀÜÂ÷³¢¸® ÀÚ±â»ó°ü¼º ÀÖ´ÂÁö È®ÀÎ
+# durbinWatsonTest : ì”ì°¨ë¼ë¦¬ ìê¸°ìƒê´€ì„± ìˆëŠ”ì§€ í™•ì¸
 #install.packages("lmtest")
-# ±Í¹«°¡¼³ : ÀÜÂ÷³¢¸® ÀÚ±â»ó°ü¼ºÀ» °¡ÁöÁö¾Ê´Â´Ù. (µ¶¸³)
-# ´ë¸³°¡¼³ : ÀÜÂ÷³¢¸® ÀÚ±â»ó°ü¼ºÀ» °¡Áø´Ù.
+# ê·€ë¬´ê°€ì„¤ : ì”ì°¨ë¼ë¦¬ ìê¸°ìƒê´€ì„±ì„ ê°€ì§€ì§€ì•ŠëŠ”ë‹¤. (ë…ë¦½)
+# ëŒ€ë¦½ê°€ì„¤ : ì”ì°¨ë¼ë¦¬ ìê¸°ìƒê´€ì„±ì„ ê°€ì§„ë‹¤.
 library(lmtest)
 dwtest(lmoutLogStep)
-# p-value < 2.2e-16 < 0.05 reject ±Í¹«°¡¼³. µ¶¸³¼ºÀ» µû¸£Áö ¾Ê´Â´Ù.
+# p-value < 2.2e-16 < 0.05 reject ê·€ë¬´ê°€ì„¤. ë…ë¦½ì„±ì„ ë”°ë¥´ì§€ ì•ŠëŠ”ë‹¤.
 
-# ÀÌ»óÄ¡¸¦ Á¦°ÅÇßÁö¸¸, µîºĞ»ê¼º, µ¶¸³¼º, Á¤±Ô¼º ¸¸Á· ¾ÈÇÔ
+# ì´ìƒì¹˜ë¥¼ ì œê±°í–ˆì§€ë§Œ, ë“±ë¶„ì‚°ì„±, ë…ë¦½ì„±, ì •ê·œì„± ë§Œì¡± ì•ˆí•¨
 
-#lmoutSTep¿¡¼­ À¯ÀÇÇÏÁö ¾Ê´Â º¯¼öµé Á¦°Å
+#lmoutSTepì—ì„œ ìœ ì˜í•˜ì§€ ì•ŠëŠ” ë³€ìˆ˜ë“¤ ì œê±°
 lm(user_num ~ area5 + number_of_holders + group + food_num + 
       move_num + AGE_002 + AGE_004 + AGE_005 + AGE_006 + 
      AGE_008 + in_hanriverpark + season  + 
      group:AGE_008 + group:traffic + food_num:move_num, data = df3_3)
 
-#cook's distance ¿µÇâÄ¡ Á¦°Å!
+#cook's distance ì˜í–¥ì¹˜ ì œê±°!
 n=nrow(df3_3)
 cooksd<-cooks.distance(lmout)
 windows()
@@ -480,7 +480,7 @@ length(cooksd_row)
 df4 = df3_3[-c(cooksd_row),]
 nrow(df4)
 
-#¿µÇâÄ¡ Á¦°ÅÇÑ µ¥ÀÌÅÍ ³Ö°í µ¹¸° È¸±Í¸ğµ¨
+#ì˜í–¥ì¹˜ ì œê±°í•œ ë°ì´í„° ë„£ê³  ëŒë¦° íšŒê·€ëª¨ë¸
 lmf=lm(user_num ~ area5 + number_of_holders + group + food_num + work_num + 
           move_num + AGE_001 + AGE_002 + AGE_004 + AGE_005 + AGE_006 + 
           AGE_008 + in_hanriverpark + season + traffic + number_of_holders:work_num + 
@@ -496,12 +496,12 @@ windows()
 par(mfrow=c(2,2))
 plot(lmfStep)
 
-### Á¤±Ô¼º °ËÁ¤ ###
-# ÀÜÂ÷°¡ Á¤±ÔºĞÆ÷ µû¸£´ÂÁö È®ÀÎ 
+### ì •ê·œì„± ê²€ì • ###
+# ì”ì°¨ê°€ ì •ê·œë¶„í¬ ë”°ë¥´ëŠ”ì§€ í™•ì¸ 
 
-# n>5000ÀÌ¹Ç·Î Kolmogorov-Smirnov test, Äİ¸ğ°í·ÎÇÁ-½º¹Ì³ëÇÁ °ËÁ¤
+# n>5000ì´ë¯€ë¡œ Kolmogorov-Smirnov test, ì½œëª¨ê³ ë¡œí”„-ìŠ¤ë¯¸ë…¸í”„ ê²€ì •
 
-# ±Í¹«°¡¼³ : Á¤±ÔºĞÆ÷¸¦ µû¸¥´Ù, ´ë¸³°¡¼³ : not ±Í¹«°¡¼³
+# ê·€ë¬´ê°€ì„¤ : ì •ê·œë¶„í¬ë¥¼ ë”°ë¥¸ë‹¤, ëŒ€ë¦½ê°€ì„¤ : not ê·€ë¬´ê°€ì„¤
 ks.test(lmfStep$residuals,"pnorm", mean=mean(lmfStep$residuals), sd=sd(lmfStep$residuals))
 
 windows()
@@ -517,19 +517,19 @@ library(car)
 durbinWatsonTest(lmfStep)
 formula(lmfStep)
 
-#ÃÖÁ¾¸ğµ¨(lmfStep)ÀÇ QQPlot È®ÀÎ QQplotÀº ÀÏÁ÷¼±À» µû¸§.
-#µû¶ó¼­ °ËÁ¤°á°ú´Â Á¤±Ô¼ºÀ» ¸¸Á·ÇÑ´Ù°í ÇÏÁö ¾ÊÁö¸¸, QQ-plotÀ» ÅëÇØ Á¤±Ô¼ºÀ» ¸¸Á·ÇÑ´Ù°í °á·Ğ ³»¸± ¼ö ÀÖÀ½.
+#ìµœì¢…ëª¨ë¸(lmfStep)ì˜ QQPlot í™•ì¸ QQplotì€ ì¼ì§ì„ ì„ ë”°ë¦„.
+#ë”°ë¼ì„œ ê²€ì •ê²°ê³¼ëŠ” ì •ê·œì„±ì„ ë§Œì¡±í•œë‹¤ê³  í•˜ì§€ ì•Šì§€ë§Œ, QQ-plotì„ í†µí•´ ì •ê·œì„±ì„ ë§Œì¡±í•œë‹¤ê³  ê²°ë¡  ë‚´ë¦´ ìˆ˜ ìˆìŒ.
 windows()
 qqPlot(lmfStep,id.method="identify",simulate=TRUE,main="Q-Q PLOT")
 
-#############µ¶¸³¼º È®ÀÎ#################
+#############ë…ë¦½ì„± í™•ì¸#################
 windows()
-plot(1:nrow(df4),residuals(lmfStep),main="ÀÜÂ÷ vs ¼ø¼­",xlab='Observation Order',ylab='residuals')
+plot(1:nrow(df4),residuals(lmfStep),main="ì”ì°¨ vs ìˆœì„œ",xlab='Observation Order',ylab='residuals')
 abline(h=1,col='red')
 
 ############################ K-fold method #########################################
 library(caret) # createFolds
-#ÃÖÁ¾ µ¥ÀÌÅÍ : df4
+#ìµœì¢… ë°ì´í„° : df4
 set.seed(1234)
 folds <- createFolds(df4$user_num, k=10)
 R2s <- sapply(folds, function (idx) {
@@ -546,12 +546,12 @@ R2s <- sapply(folds, function (idx) {
   return(list(adjR2.i,aic.i,bic.i))
 })
 str(folds)
-#10-folds ÇÑ ¸ğµ¨ adjR2.i°ª È®ÀÎ 
+#10-folds í•œ ëª¨ë¸ adjR2.iê°’ í™•ì¸ 
 
 R2s
 str(R2s)
 res=t(R2s)
-res # list ÇüÅÂ
+res # list í˜•íƒœ
 str(res)
 
 # list -> matrix
@@ -577,7 +577,7 @@ for (i in 1:30){
 }
 res_mat
 
-#10°³ÀÇ ¸ğµ¨ÀÇ Æò±Õ ¼º´É°ú ¼º´É ºĞ»ê ºñ±³
+#10ê°œì˜ ëª¨ë¸ì˜ í‰ê·  ì„±ëŠ¥ê³¼ ì„±ëŠ¥ ë¶„ì‚° ë¹„êµ
 mean(res_mat[,1])
 mean(res_mat[,2])
 mean(res_mat[,3])
@@ -585,9 +585,9 @@ sd(res_mat[,1])
 sd(res_mat[,2]) 
 sd(res_mat[,3]) 
 
-  #¿¹ÃøÄ¡ È®ÀÎ
+  #ì˜ˆì¸¡ì¹˜ í™•ì¸
   
-  setwd('D:/È¸±ÍºĞ¼®/È¸±ÍºĞ¼®_ÇÁ·ÎÁ§Æ®/data')
+  setwd('D:/íšŒê·€ë¶„ì„/íšŒê·€ë¶„ì„_í”„ë¡œì íŠ¸/data')
   user_m11=fread('new_user_m11.csv')
   str(user_m11)
   user_m11=user_m11[,-1]
@@ -600,14 +600,14 @@ sd(res_mat[,3])
 
   df4$area5[1541]
   
-  setwd('C:/Users/User/Documents/Ä«Ä«¿ÀÅå ¹ŞÀº ÆÄÀÏ')
+  setwd('C:/Users/User/Documents/ì¹´ì¹´ì˜¤í†¡ ë°›ì€ íŒŒì¼')
   
   
-  final=fread('finalfinalfinal(201812Ãß°¡)_ÃÖÁ¾.csv')
+  final=fread('finalfinalfinal(201812ì¶”ê°€)_ìµœì¢….csv')
   str(final)
   
   
-  #¹®ÀÚÇüÀ¸·Î ºÒ·¯¿ÍÁø factorÇü º¯¼ö factorÇÔ¼ö½á¼­ factorÇüÀ¸·Î ¹Ù²ãÁÖ±â
+  #ë¬¸ìí˜•ìœ¼ë¡œ ë¶ˆëŸ¬ì™€ì§„ factorí˜• ë³€ìˆ˜ factorí•¨ìˆ˜ì¨ì„œ factorí˜•ìœ¼ë¡œ ë°”ê¿”ì£¼ê¸°
   final$area=as.factor(final$area)
   final$in_hanriverpark=as.factor(final$in_hanriverpark)
   final$n_hanriverpark=as.factor(final$n_hanriverpark)
@@ -615,22 +615,22 @@ sd(res_mat[,3])
   
   str(df)
   
-  # area´Â ¼­¿ï½Ã ÀÚÄ¡±¸(25°³)·Î ¹üÁÖ°¡ ³Ê¹« ¸¹À¸¹Ç·Î ±Ç¿ªº°·Î Àç¹üÁÖÈ­(5°³)
-  # µµ½É±Ç : Á¾·Î±¸, Áß±¸, ¿ë»ê±¸
-  # ¼­ºÏ±Ç : ÀºÆò±¸, ¼­´ë¹®±¸, ¸¶Æ÷±¸
-  # µ¿ºÏ±Ç : ³ë¿ø±¸, µµºÀ±¸, °­ºÏ±¸, ¼ººÏ±¸, Áß¶û±¸, µ¿´ë¹®±¸, ¼ºµ¿±¸, ±¤Áø±¸
-  # ¼­³²±Ç : °­¼­±¸, ¾çÃµ±¸, ¿µµîÆ÷±¸, ±¸·Î±¸, ±İÃµ±¸, µ¿ÀÛ±¸, °ü¾Ç±¸
-  # µ¿³²±Ç : ¼­ÃÊ±¸, °­³²±¸, ¼ÛÆÄ±¸, °­µ¿±¸
+  # areaëŠ” ì„œìš¸ì‹œ ìì¹˜êµ¬(25ê°œ)ë¡œ ë²”ì£¼ê°€ ë„ˆë¬´ ë§ìœ¼ë¯€ë¡œ ê¶Œì—­ë³„ë¡œ ì¬ë²”ì£¼í™”(5ê°œ)
+  # ë„ì‹¬ê¶Œ : ì¢…ë¡œêµ¬, ì¤‘êµ¬, ìš©ì‚°êµ¬
+  # ì„œë¶ê¶Œ : ì€í‰êµ¬, ì„œëŒ€ë¬¸êµ¬, ë§ˆí¬êµ¬
+  # ë™ë¶ê¶Œ : ë…¸ì›êµ¬, ë„ë´‰êµ¬, ê°•ë¶êµ¬, ì„±ë¶êµ¬, ì¤‘ë‘êµ¬, ë™ëŒ€ë¬¸êµ¬, ì„±ë™êµ¬, ê´‘ì§„êµ¬
+  # ì„œë‚¨ê¶Œ : ê°•ì„œêµ¬, ì–‘ì²œêµ¬, ì˜ë“±í¬êµ¬, êµ¬ë¡œêµ¬, ê¸ˆì²œêµ¬, ë™ì‘êµ¬, ê´€ì•…êµ¬
+  # ë™ë‚¨ê¶Œ : ì„œì´ˆêµ¬, ê°•ë‚¨êµ¬, ì†¡íŒŒêµ¬, ê°•ë™êµ¬
   table(final$area)
   area5 = as.character(final$area)
   table(area5)
-  area5<-replace(area5,c(area5=="Á¾·Î±¸"|area5=="Áß±¸"|area5=="¿ë»ê±¸"),"µµ½É±Ç")
-  area5<-replace(area5,c(area5=="ÀºÆò±¸"|area5=="¼­´ë¹®±¸"|area5=="¸¶Æ÷±¸"),"¼­ºÏ±Ç")
-  area5<-replace(area5,c(area5=="³ë¿ø±¸"|area5=="µµºÀ±¸"|area5=="°­ºÏ±¸"|area5=="¼ººÏ±¸"|area5=="Áß¶û±¸"|area5=="µ¿´ë¹®±¸"|area5=="¼ºµ¿±¸"|area5=="±¤Áø±¸"),"µ¿ºÏ±Ç")
-  area5<-replace(area5,c(area5=="°­¼­±¸"|area5=="¾çÃµ±¸"|area5=="¿µµîÆ÷±¸"|area5=="±¸·Î±¸"|area5=="±İÃµ±¸"|area5=="µ¿ÀÛ±¸"|area5=="°ü¾Ç±¸"),"¼­³²±Ç")
-  area5<-replace(area5,c(area5=="¼­ÃÊ±¸"|area5=="°­³²±¸"|area5=="¼ÛÆÄ±¸"|area5=="°­µ¿±¸"),"µ¿³²±Ç")
+  area5<-replace(area5,c(area5=="ì¢…ë¡œêµ¬"|area5=="ì¤‘êµ¬"|area5=="ìš©ì‚°êµ¬"),"ë„ì‹¬ê¶Œ")
+  area5<-replace(area5,c(area5=="ì€í‰êµ¬"|area5=="ì„œëŒ€ë¬¸êµ¬"|area5=="ë§ˆí¬êµ¬"),"ì„œë¶ê¶Œ")
+  area5<-replace(area5,c(area5=="ë…¸ì›êµ¬"|area5=="ë„ë´‰êµ¬"|area5=="ê°•ë¶êµ¬"|area5=="ì„±ë¶êµ¬"|area5=="ì¤‘ë‘êµ¬"|area5=="ë™ëŒ€ë¬¸êµ¬"|area5=="ì„±ë™êµ¬"|area5=="ê´‘ì§„êµ¬"),"ë™ë¶ê¶Œ")
+  area5<-replace(area5,c(area5=="ê°•ì„œêµ¬"|area5=="ì–‘ì²œêµ¬"|area5=="ì˜ë“±í¬êµ¬"|area5=="êµ¬ë¡œêµ¬"|area5=="ê¸ˆì²œêµ¬"|area5=="ë™ì‘êµ¬"|area5=="ê´€ì•…êµ¬"),"ì„œë‚¨ê¶Œ")
+  area5<-replace(area5,c(area5=="ì„œì´ˆêµ¬"|area5=="ê°•ë‚¨êµ¬"|area5=="ì†¡íŒŒêµ¬"|area5=="ê°•ë™êµ¬"),"ë™ë‚¨ê¶Œ")
   
-  table(area5) #È®ÀÎ
+  table(area5) #í™•ì¸
   
   final=cbind(area5,final)		
   str(final)
@@ -648,7 +648,7 @@ sd(res_mat[,3])
   str(newdata)
   
   #######################################
-  #####È¸±Í º¯¼öÁß¿äµµ (¼öÄ¡Çüº¯¼ö¸¸ °¡´É)######
+  #####íšŒê·€ ë³€ìˆ˜ì¤‘ìš”ë„ (ìˆ˜ì¹˜í˜•ë³€ìˆ˜ë§Œ ê°€ëŠ¥)######
   #######################################
 
   relweights <- function(fit,...){
@@ -705,9 +705,9 @@ sd(res_mat[,3])
   windows()
   plotRelWeights(lmweight)
   
-  #ÃÖÁ¾È¸±Í¸ğµ¨ÀÇ ½Å·Ú±¸°£±×·¡ÇÁ
+  #ìµœì¢…íšŒê·€ëª¨ë¸ì˜ ì‹ ë¢°êµ¬ê°„ê·¸ë˜í”„
   
-  #ÀÏ´Ü y¿Í y_hatÀÇ scatter plotÈ®ÀÎÇÏ°í È¸±Í¸ğµ¨ Á÷¼±°ú ºñ±³
+  #ì¼ë‹¨ yì™€ y_hatì˜ scatter plotí™•ì¸í•˜ê³  íšŒê·€ëª¨ë¸ ì§ì„ ê³¼ ë¹„êµ
   
   pred=predict(lmfStep)
   str(pred)
